@@ -1,0 +1,38 @@
+# Instrument specs and scan parameters.
+#
+# The threshold values below (fractal_lookback, min_displacement_ticks,
+# zone_tolerance_ticks) are NOT derived from any authoritative source -
+# they are reasonable starting defaults only. Per docs/OPEN_QUESTIONS.md,
+# they must be calibrated against your own annotated historical chart
+# examples before any live alert should be trusted.
+
+instruments:
+  MNQ:
+    name: "Micro E-mini Nasdaq-100"
+    tick_size: 0.25
+    tick_value_usd: 0.50
+    tradovate_symbol: "MNQ"           # verify current front-month contract, e.g. MNQZ5
+    timeframes:
+      htf: ["1h", "15m"]
+      ltf: ["1m"]
+    fractal_lookback: 3               # bars on each side to confirm a swing point
+    min_displacement_ticks: 20        # EXAMPLE - calibrate against real 1m displacement legs
+    zone_tolerance_ticks: 10          # EXAMPLE - how close price must return to the OB to count as "in the zone"
+    stop_buffer_ticks: 4              # EXAMPLE - extra ticks beyond the 1m anchor for stop-loss placement
+    timeout_bars_htf: 300             # EXAMPLE - bars without progress before resetting HTF state
+    timeout_bars_ltf: 60              # EXAMPLE - bars without progress before disarming the LTF tracker
+
+  MGC:
+    name: "Micro Gold"
+    tick_size: 0.10
+    tick_value_usd: 1.00
+    tradovate_symbol: "MGC"           # verify current front-month contract, e.g. MGCZ5
+    timeframes:
+      htf: ["1h", "15m"]
+      ltf: ["1m"]
+    fractal_lookback: 3
+    min_displacement_ticks: 15        # EXAMPLE - calibrate against real 1m displacement legs
+    zone_tolerance_ticks: 8           # EXAMPLE - calibrate
+    stop_buffer_ticks: 3              # EXAMPLE - extra ticks beyond the 1m anchor for stop-loss placement
+    timeout_bars_htf: 300             # EXAMPLE - bars without progress before resetting HTF state
+    timeout_bars_ltf: 60              # EXAMPLE - bars without progress before disarming the LTF tracker

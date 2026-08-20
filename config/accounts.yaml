@@ -1,0 +1,17 @@
+# Your real Apex Trader Funding accounts. Replace the placeholder entry
+# below with your actual account(s). `rules_ref` must point at a key in
+# config/rules.yaml matching this account's size and phase.
+#
+# phase: evaluation | pa   (pa = Performance Account / funded)
+# status: active | breached | passed | funded
+
+accounts:
+  - account_id: "APEX-EXAMPLE-01"     # REPLACE with your real Apex account id/label
+    size: 50000                       # REPLACE - account size in USD
+    phase: evaluation                 # REPLACE - evaluation | pa
+    status: active
+    tradovate_account_id: ""          # REPLACE - your Tradovate account id for this Apex account
+    tradovate_env: demo               # demo | live - confirm which one this account routes through
+    rules_ref: "eval_50k"             # REPLACE - must match a key in config/rules.yaml
+    start_date: "2026-08-20"          # REPLACE
+    instruments: ["MNQ", "MGC"]

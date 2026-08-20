@@ -1,0 +1,47 @@
+# Apex Trader Funding rule numbers, keyed by account size + phase.
+#
+# IMPORTANT: every numeric value below is a PLACEHOLDER (marked EXAMPLE)
+# based on general knowledge of how Apex-style rule sets are typically
+# structured (trailing drawdown, per-account daily loss guidance, min
+# trading days, consistency rule on eval only, etc). None of these numbers
+# are guaranteed current or correct. Apex's rules change over time and
+# differ by account size/phase/promotion. Before this file is used by the
+# rule/risk tracker, verify every value against Apex Trader Funding's
+# current official rules page and update `last_verified`.
+
+last_verified: "UNVERIFIED - fill in the date you checked Apex's official rules"
+
+rule_sets:
+  eval_50k:
+    account_size: 50000
+    phase: evaluation
+    max_trailing_drawdown: 2500        # EXAMPLE - VERIFY
+    trailing_drawdown_mode: "trailing_to_threshold"   # trailing_to_threshold | eod_trailing - VERIFY which Apex uses
+    drawdown_lock_threshold: null      # EXAMPLE - profit level at which trailing drawdown stops trailing, if applicable - VERIFY
+    daily_loss_limit: null             # EXAMPLE - VERIFY whether Apex enforces a hard daily loss limit for this size
+    profit_target: 3000                # EXAMPLE - VERIFY
+    min_trading_days: 7                # EXAMPLE - VERIFY
+    consistency_rule_pct: 30           # EXAMPLE - VERIFY (percent of total profit from any single day, eval only)
+    max_contracts: null                # EXAMPLE - VERIFY per-size contract scaling limits
+
+  pa_50k:
+    account_size: 50000
+    phase: pa
+    max_trailing_drawdown: 2500        # EXAMPLE - VERIFY (often unlocks/changes vs eval)
+    trailing_drawdown_mode: "trailing_to_threshold"
+    drawdown_lock_threshold: null      # EXAMPLE - VERIFY
+    daily_loss_limit: null             # EXAMPLE - VERIFY
+    profit_target: null                # PA typically has no profit target - VERIFY
+    min_trading_days: 0                # EXAMPLE - VERIFY (PA min-days requirement is usually tied to payouts, not the account itself)
+    consistency_rule_pct: null         # EXAMPLE - VERIFY (user's understanding: PA has no consistency rule)
+    max_contracts: null                # EXAMPLE - VERIFY
+
+  # Add one rule_sets entry per account size/phase you actually trade
+  # (e.g. eval_100k, pa_100k, eval_150k, ...), following the same shape.
+
+payout_rules:
+  # EXAMPLE - VERIFY all values against Apex's current payout policy.
+  min_days_since_account_start: 8      # EXAMPLE - VERIFY
+  min_days_between_payouts: 14         # EXAMPLE - VERIFY (cadence between successive payout requests)
+  min_trading_days_for_first_payout: 8 # EXAMPLE - VERIFY
+  profit_split_pct: 90                 # EXAMPLE - VERIFY (may change with # of payouts / account tier)
